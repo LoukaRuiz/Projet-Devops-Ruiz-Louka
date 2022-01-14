@@ -1,9 +1,9 @@
 #!groovy
 println('------------------------------------------------------------------Import Job CI/jobs1')
-def pipelineScript = new File('/var/jenkins_config/jobs/sb3t-pipeline.groovy').getText("UTF-8")
+def pipelineScript = new File('/var/jenkins_config/jobs/jobs1-pipeline.groovy').getText("UTF-8")
 
 pipelineJob('CI/jobs1') {
-    description("Build .jar from sb3t java application")
+    description("Build .jar from jobs1 java application")
     parameters {
         stringParam {
             name('BRANCH')
