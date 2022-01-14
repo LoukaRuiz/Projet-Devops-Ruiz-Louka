@@ -23,7 +23,7 @@ resource "aws_instance" "app_server" {
   ami           = "ami-0d97ef13c06b05a19"
   instance_type = "t2.micro"
   associate_public_ip_address = true
-  user_data                   = data.template_file.user_data.rendered
+  user_data = data.template_file.user_data.rendered
   key_name = "ssh_Ruiz"
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
 
@@ -92,5 +92,5 @@ output "instance_id" {
 
 output "instance_public_ip" {
   description = "Public IP address of the EC2 instance"
-  value       = aws_instance.app_server.*.public_ip
+  value= aws_instance.app_server.*.public_ip
 }
