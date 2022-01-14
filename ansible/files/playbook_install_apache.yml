@@ -1,0 +1,6 @@
+---
+- name: Java
+  become: yes
+  hosts: terraform
+  roles:
+    - JavaCac
