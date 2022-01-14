@@ -1,0 +1,39 @@
+#cloud-config
+# Add groups to the system
+# Adds the ubuntu group with members 'root' and 'sys'
+# and the empty group hashicorp.
+groups:
+  - ubuntu: [root,sys]
+  - hashicorp
+
+# Add users to the system. Users are added after groups are added.
+users:
+  - default
+  - name: deploy
+    gecos: deploy
+    shell: /bin/bash
+    primary_group: hashicorp
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    lock_passwd: false
+    ssh_authorized_keys: 
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6qoKc2/I+9zFtGIZNBGtUDAgJZ5OrByYWW3i2IDRwgfDwrTEtMJ64TUp0fcfBH+vUEN2LXiKnH/Lh9U06EcAbEck3lG9rO2liFf2rrI8c+wWUV/cqqmz0Cu57rOvLLkvrZJ30QNLAAHBTl4WO90jEqMoQ2WbMMwnm1/ncB8kbsWtR8XeGFxF+gPMg3B6o7stQbVGt3JIqoQ7PId1tW18DAwiLV75YuMZl5Xth4FfGZCh5s3kxWIqyISRMafNRDbmAWVpquskbxIUzNUWtDyWn7eXY6lzmFSKdoO8yc6ah2jYYGCA5aW6TTNmF7YnsALLzP3R3SsAuksXBTI/Lo4u+qU5b9BmnzuI0Dy6U7MlF5kfhIhkMrNqzG69cw+bB0XEsurTUcKtqixoqtEPgPo232kvYpnJbrNKa9PndxrQu3jENP9seQSpqtkYgrARVVp6P0SuAG6TROrHOSJVAfyFCRlAq7WCFChggJzg3236eyUEnMq+b4J5JdVupbaADyFs= auth\louka.ruiz.i@AIB-A0034-P
+
+  - name: user
+    gecos: terraform
+    shell: /bin/bash
+    primary_group: hashicorp
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: admin
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6qoKc2/I+9zFtGIZNBGtUDAgJZ5OrByYWW3i2IDRwgfDwrTEtMJ64TUp0fcfBH+vUEN2LXiKnH/Lh9U06EcAbEck3lG9rO2liFf2rrI8c+wWUV/cqqmz0Cu57rOvLLkvrZJ30QNLAAHBTl4WO90jEqMoQ2WbMMwnm1/ncB8kbsWtR8XeGFxF+gPMg3B6o7stQbVGt3JIqoQ7PId1tW18DAwiLV75YuMZl5Xth4FfGZCh5s3kxWIqyISRMafNRDbmAWVpquskbxIUzNUWtDyWn7eXY6lzmFSKdoO8yc6ah2jYYGCA5aW6TTNmF7YnsALLzP3R3SsAuksXBTI/Lo4u+qU5b9BmnzuI0Dy6U7MlF5kfhIhkMrNqzG69cw+bB0XEsurTUcKtqixoqtEPgPo232kvYpnJbrNKa9PndxrQu3jENP9seQSpqtkYgrARVVp6P0SuAG6TROrHOSJVAfyFCRlAq7WCFChggJzg3236eyUEnMq+b4J5JdVupbaADyFs= auth\louka.ruiz.i@AIB-A0034-P
+
+
+# Downloads the python package
+packages:
+  - python3
+
+
+runcmd:
+  -  sudo ln -s /usr/bin/python3 /usr/bin/python
